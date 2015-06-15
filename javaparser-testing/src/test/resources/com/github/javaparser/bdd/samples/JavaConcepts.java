@@ -3,10 +3,13 @@ package japa.bdd.samples;
 import com.github.javaparser.JavaParser;
 
 import japa.parser.ParseException;
+
 import com.github.javaparser.ast.CompilationUnit;
+
 import org.junit.Ignore;
 
 import java.io.*;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
 @Ignore
@@ -391,7 +394,10 @@ public class JavaConcepts<T extends List<int[]>, X> extends Base implements Seri
 }
 
 class Base {
-
+    static final Comparator<ChronoLocalDate> DATE_ORDER =
+            (Comparator<ChronoLocalDate> & Serializable) (date1, date2) -> {
+                return Long.compare(date1.toEpochDay(), date2.toEpochDay());
+            };
     public <A, B> void check2(A val1, B val2) {
     }
 }
