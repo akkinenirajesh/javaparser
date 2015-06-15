@@ -290,3 +290,14 @@ class A {
 }
 Then all nodes refer to their parent
 
+Scenario: A lambda expression inside a conditional expression is parsed by the Java Parser
+
+Given a CompilationUnit
+When the following source is parsed:
+public class A{
+	static <T> Predicate<T> isEqual(Object targetRef) {
+	    return (null == targetRef)? Objects::isNull : object -> targetRef.equals(object);
+	}
+}
+Then ThenExpr in the conditional expression of the statement 1 in method 1 in class 1 is LambdaExpr
+
